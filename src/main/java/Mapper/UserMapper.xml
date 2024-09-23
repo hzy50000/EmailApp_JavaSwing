@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper.UserMapper">
+    <select id="getUserList" resultType="pojo.User">
+        select * from email.user
+    </select>
+
+    <insert id="addUser" parameterType="java.lang.String">
+        INSERT INTO email.user (username, password) VALUES (#{username}, #{password})
+    </insert>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        DELETE FROM email.user WHERE username = #{username}
+    </delete>
+
+    <update id="updateUser" parameterType="java.lang.String">
+        UPDATE email.user SET password = #{password} WHERE username = #{username}
+    </update>
+
+    <select id="findUser" resultType="pojo.User">
+        SELECT * FROM email.user WHERE username = #{username} AND password = #{password}
+    </select>
+</mapper>
