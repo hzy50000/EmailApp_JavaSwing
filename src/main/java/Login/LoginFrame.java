@@ -52,7 +52,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         btnRegister.setBounds(220, 106, 70, 23);
         btnRegister.setText("注册");
         btnChangePassword = new JButton();
-        btnChangePassword.setBounds(290, 106, 70, 23);
+        btnChangePassword.setBounds(420, 106, 70, 23);
         btnChangePassword.setText("忘记密码");
 
         c.add(btnLogin);
