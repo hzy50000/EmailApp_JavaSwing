@@ -1,6 +1,7 @@
 package Login;
 
 import Service.UserService;
+import org.jdesktop.swingx.prompt.PromptSupport;
 import pojo.User;
 
 import java.awt.*;
@@ -33,6 +34,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         txtAccount.setBounds(145, 20, 96, 21); //设置文本框大小
         txtAccount.setColumns(15); //设置文本框的可输入的文字个数
         c.add(txtAccount); //往窗体中添加该文本框
+        PromptSupport.setPrompt("请输入账号", txtAccount);
         lblPassword = new JLabel();
         lblPassword.setBounds(100, 65, 42, 15);
         lblPassword.setText("密码：");
@@ -42,6 +44,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         pswPassword.setColumns(15);
         pswPassword.setEchoChar('*'); //设置密码框的缺省显示字符
         c.add(pswPassword);
+        PromptSupport.setPrompt("请输入密码", pswPassword);
         btnLogin = new JButton();
         btnLogin.setBounds(150, 106, 70, 23);
         btnLogin.setText("确定");

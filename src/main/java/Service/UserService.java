@@ -23,10 +23,6 @@ public class UserService {
         userMapper.addUser(username, password);
     }
 
-    public void deleteUser(String username) {
-        userMapper.deleteUser(username);
-    }
-
     public void updateUser(String username, String newPassword) {
         userMapper.updateUser(username, newPassword);
     }
