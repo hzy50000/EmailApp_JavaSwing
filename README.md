@@ -18,4 +18,4 @@
 
 ---
 
-Written By 黄哲远，郑子龙
+Written By Andy Huang, TheWestWings
