@@ -4,10 +4,12 @@ import pojo.RoundBorder;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class EmailFrame extends JFrame {
+public class EmailFrame extends JFrame implements ActionListener {
 
     Container c; // 声明添加组件的容器
     JButton userSetButton;
@@ -24,6 +26,9 @@ public class EmailFrame extends JFrame {
         userSetButton = new JButton();
         userSetButton.setBounds(750, 30, 80, 60);
         userSetButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+        userSetButton.addActionListener(e -> {
+            new SendEmailFrame();
+        });
         URL url = new URL("https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg");
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
@@ -36,6 +41,9 @@ public class EmailFrame extends JFrame {
         newEmailButton.setBounds(50, 30, 200, 60);
         newEmailButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         newEmailButton.setBackground(Color.white);
+        newEmailButton.addActionListener(e -> {
+            new SendEmailFrame();
+        });
         c.add(newEmailButton);
 
         JButton draftBoxButton = new JButton();
@@ -68,15 +76,21 @@ public class EmailFrame extends JFrame {
         jTextField.setBorder(new RoundBorder(Color.GRAY)); // 设置文本框的边框
         c.add(jTextField);
         c.add(scrollPane);
-        userSetButton.addActionListener(e -> {
-            jTextField.setText("用户设置");
-        });
         c.add(userSetButton);
 
         this.setVisible(true); // 设置窗体可见，放在最后一条
     }
 
+    public void actionUserSetButton() {
+
+    }
+
     public static void main(String[] args) throws MalformedURLException {
         new EmailFrame();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
