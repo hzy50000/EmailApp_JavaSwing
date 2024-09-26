@@ -22,7 +22,8 @@ public class EmailFrame extends JFrame {
 
         // 用户设置按钮
         userSetButton = new JButton();
-        userSetButton.setBounds(750, 30, 100, 80);
+        userSetButton.setBounds(750, 30, 80, 60);
+        userSetButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         URL url = new URL("https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg");
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
@@ -30,7 +31,20 @@ public class EmailFrame extends JFrame {
         } else {
             System.err.println("图像文件未找到");
         }
-        c.add(userSetButton);
+        JButton newEmailButton = new JButton();
+        newEmailButton.setText("新建邮件");
+        newEmailButton.setBounds(50, 30, 200, 60);
+        newEmailButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+        newEmailButton.setBackground(Color.white);
+        c.add(newEmailButton);
+
+        JButton draftBoxButton = new JButton();
+        draftBoxButton.setText("草稿箱");
+        draftBoxButton.setBounds(270, 30, 200, 60);
+        draftBoxButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+        draftBoxButton.setBackground(Color.white);
+        c.add(draftBoxButton);
+
 
         // 初始化 c2
         JPanel c2 = new JPanel();
@@ -46,8 +60,18 @@ public class EmailFrame extends JFrame {
         }
 
         JScrollPane scrollPane = new JScrollPane(c2);
-        scrollPane.setBounds(50, 50, 300, 500); // 设置滚动面板的位置和大小
+        scrollPane.setBorder(new RoundBorder(Color.GRAY)); // 设置滚动面板的边框
+        scrollPane.setBounds(50, 100, 300, 500); // 设置滚动面板的位置和大小
+
+        JTextField jTextField = new JTextField();
+        jTextField.setBounds(380, 100, 450, 500);
+        jTextField.setBorder(new RoundBorder(Color.GRAY)); // 设置文本框的边框
+        c.add(jTextField);
         c.add(scrollPane);
+        userSetButton.addActionListener(e -> {
+            jTextField.setText("用户设置");
+        });
+        c.add(userSetButton);
 
         this.setVisible(true); // 设置窗体可见，放在最后一条
     }
