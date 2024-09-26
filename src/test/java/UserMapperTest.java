@@ -1,3 +1,4 @@
+import Login.LoginFrame;
 import Mapper.UserMapper;
 import Util.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -5,6 +6,7 @@ import org.junit.Test;
 import pojo.User;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class UserMapperTest {
     //第一步：获得sqlSession对象
@@ -30,5 +32,12 @@ public class UserMapperTest {
                 sqlSession.close();
             }
         }
+    }
+
+    @Test
+    public void test1(){
+        LoginFrame loginFrame = new LoginFrame();
+        Scanner input = new Scanner(System.in);
+        int a = input.nextInt();
     }
 }

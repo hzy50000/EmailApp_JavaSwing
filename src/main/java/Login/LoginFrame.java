@@ -6,6 +6,7 @@ import pojo.User;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
 import javax.swing.*;
 public class LoginFrame extends JFrame implements ActionListener {
     JLabel lblPassword ; //密码标签
@@ -69,6 +70,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             new ForgetPasswordFrame();
         });
         this.setVisible(true);//设置窗体可见，放在最后一条
+
     }
 
     @Override
