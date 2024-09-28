@@ -13,6 +13,7 @@ public class EmailFrame extends JFrame implements ActionListener {
 
     Container c; // 声明添加组件的容器
     JButton userSetButton;
+    JButton PasswordManagerButton;
 
     public EmailFrame() throws HeadlessException, MalformedURLException { // 构造方法
         c = getContentPane(); // 获取默认的内容面板
@@ -21,6 +22,8 @@ public class EmailFrame extends JFrame implements ActionListener {
         setBounds(100, 100, 900, 700); // 设置大小：窗体左上角坐标，宽度和高度
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置缺省的关闭动作
         this.setLocationRelativeTo(null); // 设置窗体居中
+
+
 
         // 用户设置按钮
         userSetButton = new JButton();
@@ -45,6 +48,16 @@ public class EmailFrame extends JFrame implements ActionListener {
             new SendEmailFrame();
         });
         c.add(newEmailButton);
+
+        PasswordManagerButton = new JButton();
+        PasswordManagerButton.setText("密码管理");
+        PasswordManagerButton.setBounds(500, 30, 200, 60);
+        PasswordManagerButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+        PasswordManagerButton.setBackground(Color.white);
+        c.add(PasswordManagerButton);
+
+
+
 
         JButton draftBoxButton = new JButton();
         draftBoxButton.setText("草稿箱");
