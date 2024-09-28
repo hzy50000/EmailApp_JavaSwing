@@ -21,7 +21,7 @@ public class SendEmailFrame extends JFrame {
         setBounds(100, 100, 700, 500);
 
         JLabel toUserLabel = new JLabel();
-        toUserLabel.setBounds(10, 50, 42, 15);
+        toUserLabel.setBounds(10, 50, 60, 15);
         toUserLabel.setText("收件人：");
         c.add(toUserLabel);
 
@@ -30,7 +30,7 @@ public class SendEmailFrame extends JFrame {
         c.add(toUserTextField);
 
         JLabel subjectLabel = new JLabel();
-        subjectLabel.setBounds(10, 100, 42, 15);
+        subjectLabel.setBounds(10, 100, 60, 15);
         subjectLabel.setText("邮件主题：");
         c.add(subjectLabel);
 
@@ -39,7 +39,7 @@ public class SendEmailFrame extends JFrame {
         c.add(subjectTextField);
 
         JLabel contentLabel = new JLabel();
-        contentLabel.setBounds(10, 150, 42, 15);
+        contentLabel.setBounds(10, 150, 60, 15);
         contentLabel.setText("邮件内容：");
         c.add(contentLabel);
 
