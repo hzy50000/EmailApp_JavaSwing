@@ -26,25 +26,25 @@ public class SendEmailFrame extends JFrame {
         c.add(toUserLabel);
 
         JTextField toUserTextField = new JTextField();
-        toUserTextField.setBounds(50, 50, 200, 30);
+        toUserTextField.setBounds(80, 50, 200, 30);
         c.add(toUserTextField);
 
         JLabel subjectLabel = new JLabel();
-        subjectLabel.setBounds(10, 100, 60, 15);
+        subjectLabel.setBounds(10, 100, 65, 15);
         subjectLabel.setText("邮件主题：");
         c.add(subjectLabel);
 
         JTextField subjectTextField = new JTextField();
-        subjectTextField.setBounds(50, 100, 200, 30);
+        subjectTextField.setBounds(80, 100, 200, 30);
         c.add(subjectTextField);
 
         JLabel contentLabel = new JLabel();
-        contentLabel.setBounds(10, 150, 60, 15);
+        contentLabel.setBounds(10, 150, 65, 15);
         contentLabel.setText("邮件内容：");
         c.add(contentLabel);
 
         JTextField contentTextField = new JTextField();
-        contentTextField.setBounds(50, 150, 200, 50);
+        contentTextField.setBounds(80, 150, 200, 50);
         c.add(contentTextField);
 
 
