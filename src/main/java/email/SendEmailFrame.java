@@ -9,6 +9,9 @@ public class SendEmailFrame extends JFrame {
 
     sendService sendService = new sendService();
     Container c; // 声明添加组件的容器
+    JLabel toUserLabel;
+    JLabel subjectLabel;
+    JLabel contentLabel;
 
 
     public SendEmailFrame() {
@@ -17,13 +20,28 @@ public class SendEmailFrame extends JFrame {
         setTitle("发送邮件");
         setBounds(100, 100, 700, 500);
 
+        JLabel toUserLabel = new JLabel();
+        toUserLabel.setBounds(10, 50, 42, 15);
+        toUserLabel.setText("收件人：");
+        c.add(toUserLabel);
+
         JTextField toUserTextField = new JTextField();
         toUserTextField.setBounds(50, 50, 200, 30);
         c.add(toUserTextField);
 
+        JLabel subjectLabel = new JLabel();
+        subjectLabel.setBounds(10, 100, 42, 15);
+        subjectLabel.setText("邮件主题：");
+        c.add(subjectLabel);
+
         JTextField subjectTextField = new JTextField();
         subjectTextField.setBounds(50, 100, 200, 30);
         c.add(subjectTextField);
+
+        JLabel contentLabel = new JLabel();
+        contentLabel.setBounds(10, 150, 42, 15);
+        contentLabel.setText("邮件内容：");
+        c.add(contentLabel);
 
         JTextField contentTextField = new JTextField();
         contentTextField.setBounds(50, 150, 200, 50);
