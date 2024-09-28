@@ -18,5 +18,6 @@
 
     <mappers>
         <mapper resource="Mapper/UserMapper.xml"/>
+        <mapper resource="Mapper/EmailMapper.xml"/>
     </mappers>
 </configuration>
