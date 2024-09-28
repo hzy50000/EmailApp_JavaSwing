@@ -21,41 +21,41 @@ public class RegisterFrame extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
         setTitle("注册");
-        setBounds(100, 100, 360, 179);
+        setBounds(100, 100, 360, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
         Username = new JLabel();
-        Username.setBounds(100, 23, 42, 15);
+        Username.setBounds(100, 23, 60, 15);
         Username.setText("用户名：");
         c.add(Username);
         txtUsername = new JTextField();
-        txtUsername.setBounds(145, 20, 96, 21);
+        txtUsername.setBounds(160, 20, 96, 21);
         txtUsername.setColumns(15);
         c.add(txtUsername);
 
         Password = new JLabel();
-        Password.setBounds(100, 65, 42, 15);
+        Password.setBounds(100, 65, 60, 15);
         Password.setText("密码：");
         c.add(Password);
         txtPassword = new JPasswordField();
-        txtPassword.setBounds(145, 62, 96, 21);
+        txtPassword.setBounds(160, 62, 96, 21);
         txtPassword.setColumns(15);
         txtPassword.setEchoChar('*');
         c.add(txtPassword);
 
         ConfirmPassword = new JLabel();
-        ConfirmPassword.setBounds(100, 107, 42, 15);
+        ConfirmPassword.setBounds(100, 107, 65, 15);
         ConfirmPassword.setText("确认密码：");
         c.add(ConfirmPassword);
         txtConfirmPassword = new JPasswordField();
-        txtConfirmPassword.setBounds(145, 104, 96, 21);
+        txtConfirmPassword.setBounds(160, 104, 96, 21);
         txtConfirmPassword.setColumns(15);
         txtConfirmPassword.setEchoChar('*');
         c.add(txtConfirmPassword);
 
         btnRegister = new JButton();
-        btnRegister.setBounds(150, 140, 70, 23);
+        btnRegister.setBounds(150, 130, 70, 23);
         btnRegister.setText("注册");
         c.add(btnRegister);
 

@@ -1,12 +1,12 @@
 package Login;
 
 import Service.UserService;
+import email.EmailFrame;
 import org.jdesktop.swingx.prompt.PromptSupport;
 import pojo.User;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Scanner;
 import javax.swing.*;
 public class LoginFrame extends JFrame implements ActionListener {
     JLabel lblPassword ; //密码标签
@@ -23,7 +23,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         c = getContentPane();//获取默认的内容面板
         c.setLayout(null);//关闭默认的布局
         setTitle("登录");//设置窗体的标题
-        setBounds(100, 100, 360, 179); //设置大小：窗体左上角坐标，宽度和高度
+        setBounds(100, 100, 400, 179); //设置大小：窗体左上角坐标，宽度和高度
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //设置缺省的关闭动作
         this.setLocationRelativeTo(null); //设置窗体居中
 //根据界面的布局，自行设计每个组件的位置和大小
@@ -47,14 +47,15 @@ public class LoginFrame extends JFrame implements ActionListener {
         c.add(pswPassword);
         PromptSupport.setPrompt("请输入密码", pswPassword);
         btnLogin = new JButton();
-        btnLogin.setBounds(150, 106, 70, 23);
+        btnLogin.setBounds(120, 106, 70, 23);
         btnLogin.setText("确定");
         btnRegister = new JButton();
-        btnRegister.setBounds(220, 106, 70, 23);
+        btnRegister.setBounds(190, 106, 70, 23);
         btnRegister.setText("注册");
+
         btnChangePassword = new JButton();
-        btnChangePassword.setBounds(420, 106, 70, 23);
-        btnChangePassword.setText("忘记密码");
+        btnChangePassword.setBounds(260, 106, 100, 23);
+        btnChangePassword.setText("修改密码");
 
         c.add(btnLogin);
         c.add(btnRegister);
@@ -67,7 +68,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         });
         btnChangePassword.addActionListener(e -> {
             // 创建并显示 ForgetPasswordFrame 实例
-            new ForgetPasswordFrame();
+            new ChangePasswordFrame();
         });
         this.setVisible(true);//设置窗体可见，放在最后一条
 
@@ -90,11 +91,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null,"用户身份合法，可以进入");
                     this.setVisible(false);//隐藏当前窗体
                     //邮件客户端主页...
-
-
-
-
-
+                    new EmailFrame();
                 }
                 else
                     JOptionPane.showMessageDialog(null,"本用户不存在，请先注册");

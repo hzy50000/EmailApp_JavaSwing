@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ForgetPasswordFrame extends JFrame implements ActionListener {
+public class ChangePasswordFrame extends JFrame implements ActionListener {
     JLabel lblAccount;
     JLabel OriginalPassword;
     JLabel NewPassword;
@@ -19,49 +19,49 @@ public class ForgetPasswordFrame extends JFrame implements ActionListener {
     JButton btnConfirm;
     Container c;
 
-    public ForgetPasswordFrame() throws HeadlessException {
+    public ChangePasswordFrame() throws HeadlessException {
         c = getContentPane();
         c.setLayout(null);
-        setTitle("忘记密码");
-        setBounds(100, 100, 360, 179);
+        setTitle("修改密码");
+        setBounds(100, 100, 360, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
         lblAccount = new JLabel();
-        lblAccount.setBounds(100, 23, 42, 15);
+        lblAccount.setBounds(100, 23, 60, 15);
         lblAccount.setText("账号：");
         c.add(lblAccount);
         txtAccount = new JTextField();
-        txtAccount.setBounds(145, 20, 96, 21);
+        txtAccount.setBounds(180, 20, 96, 21);
         txtAccount.setColumns(15);
         c.add(txtAccount);
 
         OriginalPassword = new JLabel();
-        OriginalPassword.setBounds(100, 65, 42, 15);
+        OriginalPassword.setBounds(100, 65, 60, 15);
         OriginalPassword.setText("原密码：");
         c.add(OriginalPassword);
         txtOriginalPassword = new JPasswordField();
-        txtOriginalPassword.setBounds(145, 62, 96, 21);
+        txtOriginalPassword.setBounds(180, 62, 96, 21);
         txtOriginalPassword.setColumns(15);
         txtOriginalPassword.setEchoChar('*');
         c.add(txtOriginalPassword);
 
         NewPassword = new JLabel();
-        NewPassword.setBounds(100, 107, 42, 15);
+        NewPassword.setBounds(100, 107, 60, 15);
         NewPassword.setText("新密码：");
         c.add(NewPassword);
         txtNewPassword = new JPasswordField();
-        txtNewPassword.setBounds(145, 104, 96, 21);
+        txtNewPassword.setBounds(180, 104, 96, 21);
         txtNewPassword.setColumns(15);
         txtNewPassword.setEchoChar('*');
         c.add(txtNewPassword);
 
         ConfirmPassword = new JLabel();
-        ConfirmPassword.setBounds(100, 149, 42, 15);
+        ConfirmPassword.setBounds(100, 149, 75, 15);
         ConfirmPassword.setText("确认新密码：");
         c.add(ConfirmPassword);
         txtConfirmPassword = new JPasswordField();
-        txtConfirmPassword.setBounds(145, 146, 96, 21);
+        txtConfirmPassword.setBounds(180, 146, 96, 21);
         txtConfirmPassword.setColumns(15);
         txtConfirmPassword.setEchoChar('*');
         c.add(txtConfirmPassword);
@@ -72,6 +72,7 @@ public class ForgetPasswordFrame extends JFrame implements ActionListener {
         c.add(btnConfirm);
 
         btnConfirm.addActionListener(this);
+        this.setVisible(true);
     }
 
     @Override
