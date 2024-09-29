@@ -67,6 +67,7 @@ public class PasswordManageFrame extends JFrame {
         this.add(buttonPanel, BorderLayout.SOUTH);
         refreshTable();
         setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口
     }
 
         private void refreshTable() {
