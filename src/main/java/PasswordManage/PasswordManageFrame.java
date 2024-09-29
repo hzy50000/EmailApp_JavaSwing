@@ -51,19 +51,15 @@ public class PasswordManageFrame extends JFrame {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 删除Email账户的逻辑
+                new DeletePasswordFrame();
             }
         });
         buttonPanel.add(deleteButton);
 
         // 创建刷新按钮
         JButton refreshButton = new JButton("刷新");
-        refreshButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                refreshTable();
-            }
-        });
+        refreshButton.addActionListener(e -> refreshTable());
+        buttonPanel.add(refreshButton);
         this.add(buttonPanel, BorderLayout.SOUTH);
         refreshTable();
         setVisible(true);

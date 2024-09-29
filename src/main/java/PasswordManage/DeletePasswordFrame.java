@@ -7,25 +7,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPasswordFrame extends JFrame {
+public class DeletePasswordFrame extends JFrame {
     private JTextField emailAccountField;
-    private JTextField passwordField;
     private EmailPasswordService emailPasswordService = new EmailPasswordService();
 
-    public AddPasswordFrame() {
-        setTitle("添加Email账户");
+    public DeletePasswordFrame() {
+        setTitle("删除Email账户");
         setBounds(100, 100, 300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new GridLayout(3, 2));
+        setLayout(new GridLayout(2, 2));
 
         // 创建表单
         add(new JLabel("Email账户:"));
         emailAccountField = new JTextField();
         add(emailAccountField);
-
-        add(new JLabel("密码:"));
-        passwordField = new JTextField();
-        add(passwordField);
 
         // 创建提交按钮
         JButton submitButton = new JButton("提交");
@@ -33,8 +28,7 @@ public class AddPasswordFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String emailAccount = emailAccountField.getText();
-                String password = passwordField.getText();
-                emailPasswordService.addEmailPassword(emailAccount, password);
+                emailPasswordService.deleteEmailPassword(emailAccount);
                 dispose();
             }
         });
