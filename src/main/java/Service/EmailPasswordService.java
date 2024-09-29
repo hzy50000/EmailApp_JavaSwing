@@ -8,11 +8,12 @@ import pojo.EmailPassword;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 public class EmailPasswordService {
     private final EmailPasswordMapper emailPasswordMapper;
 
-    public EmailPasswordService(EmailPasswordMapper emailPasswordMapper) {
+    public EmailPasswordService() {
         // 加载MyBatis配置文件
         InputStream inputStream = UserService.class.getClassLoader().getResourceAsStream("mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -36,7 +37,8 @@ public class EmailPasswordService {
         return emailPasswordMapper.getEmailPassword(emailaccount);
     }
 
-    public List<EmailPassword> getallEmailPassword() {
-        return emailPasswordMapper.getAllEmailPassword();
+    public List<EmailPassword> getAllEmailPasswords() {
+        return emailPasswordMapper.getAllEmailPasswords();
     }
+
 }

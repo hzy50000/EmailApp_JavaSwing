@@ -19,5 +19,6 @@
     <mappers>
         <mapper resource="Mapper/UserMapper.xml"/>
         <mapper resource="Mapper/EmailMapper.xml"/>
+        <mapper resource="Mapper/EmailPasswordMapper.xml"/>
     </mappers>
 </configuration>

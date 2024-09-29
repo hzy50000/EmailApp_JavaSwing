@@ -1,16 +1,19 @@
 package PasswordManage;
 
 import Service.EmailPasswordService;
+import pojo.EmailPassword;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
 
 public class PasswordManageFrame extends JFrame {
     private DefaultTableModel model;
-    private EmailPasswordService emailPasswordService;
+    private EmailPasswordService emailPasswordService = new EmailPasswordService();
 
     public PasswordManageFrame() {
         setTitle("密码管理");
@@ -38,7 +41,7 @@ public class PasswordManageFrame extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new AddPasswordFrame();
             }
         });
         buttonPanel.add(addButton);
@@ -53,11 +56,29 @@ public class PasswordManageFrame extends JFrame {
         });
         buttonPanel.add(deleteButton);
 
-
+        // 创建刷新按钮
+        JButton refreshButton = new JButton("刷新");
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshTable();
+            }
+        });
         this.add(buttonPanel, BorderLayout.SOUTH);
-
+        refreshTable();
         setVisible(true);
     }
 
+        private void refreshTable() {
+            model.setRowCount(0);
+            List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords();
+            for (EmailPassword emailPassword : emailPasswords) {
+                model.addRow(new Object[]{emailPassword.getEmailaccount(), emailPassword.getEmailpassword()});
+            }
+    }
+
+    public static void main(String[] args) {
+        new PasswordManageFrame();
+    }
 
 }

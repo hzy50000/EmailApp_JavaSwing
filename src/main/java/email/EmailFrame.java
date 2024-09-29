@@ -54,6 +54,9 @@ public class EmailFrame extends JFrame implements ActionListener {
         PasswordManagerButton.setBounds(500, 30, 200, 60);
         PasswordManagerButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         PasswordManagerButton.setBackground(Color.white);
+        PasswordManagerButton.addActionListener(e -> {
+            new PasswordManage.PasswordManageFrame();
+        });
         c.add(PasswordManagerButton);
 
 
