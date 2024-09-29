@@ -1,13 +1,13 @@
 package email;
 
-import Service.sendService;
+import Service.SendService;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SendEmailFrame extends JFrame {
 
-    sendService sendService = new sendService();
+    SendService sendService = new SendService();
     Container c; // 声明添加组件的容器
     JLabel toUserLabel;
     JLabel subjectLabel;
