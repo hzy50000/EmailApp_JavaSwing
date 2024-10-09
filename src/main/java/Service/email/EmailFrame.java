@@ -1,6 +1,8 @@
 package Service.email;
 
 import Service.PasswordManage.PasswordManageFrame;
+import Service.ReceiveService;
+import pojo.Message;
 import pojo.RoundBorder;
 
 import javax.swing.*;
@@ -15,6 +17,7 @@ public class EmailFrame extends JFrame implements ActionListener {
     Container c; // 声明添加组件的容器
     JButton userSetButton;
     JButton PasswordManagerButton;
+    ReceiveService receiveService = new ReceiveService();
 
     public EmailFrame() throws HeadlessException, MalformedURLException { // 构造方法
         c = getContentPane(); // 获取默认的内容面板
@@ -61,6 +64,8 @@ public class EmailFrame extends JFrame implements ActionListener {
         c.add(PasswordManagerButton);
 
 
+        Message[] messages = receiveService.getMessages();
+
 
 
         JButton draftBoxButton = new JButton();
@@ -74,24 +79,33 @@ public class EmailFrame extends JFrame implements ActionListener {
         // 初始化 c2
         JPanel c2 = new JPanel();
 //        c2.setBackground(Color.LIGHT_GRAY);
-        c2.setLayout(new GridLayout(50, 1, 0, 0)); // 使用 GridLayout 确保组件垂直排列
-
-        for (int i = 0; i < 50; i++) {
-            JButton button = new JButton("button" + i);
-            button.setPreferredSize(new Dimension(200, 50)); // 设置按钮的首选尺寸
-            button.setBackground(Color.white);
-            button.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
-            c2.add(button);
-        }
+        c2.setLayout(new GridLayout(messages.length, 1, 0, 0)); // 使用 GridLayout 确保组件垂直排列
 
         JScrollPane scrollPane = new JScrollPane(c2);
         scrollPane.setBorder(new RoundBorder(Color.GRAY)); // 设置滚动面板的边框
         scrollPane.setBounds(50, 100, 300, 500); // 设置滚动面板的位置和大小
 
-        JTextField jTextField = new JTextField();
-        jTextField.setBounds(380, 100, 450, 500);
-        jTextField.setBorder(new RoundBorder(Color.GRAY)); // 设置文本框的边框
-        c.add(jTextField);
+        JTextArea jTextArea = new JTextArea();
+        jTextArea.setBounds(380, 100, 450, 500);
+        jTextArea.setBorder(new RoundBorder(Color.GRAY)); // 设置文本框的边框
+        jTextArea.setLineWrap(true); // 设置自动换行
+        jTextArea.setWrapStyleWord(true); // 设置换行时以单词为单位
+
+        for (int i = 0; i < messages.length; i++) {
+            String sentUser = messages[i].getSendUser();
+            String text = messages[i].getContent();
+            JButton button = new JButton(sentUser);
+            button.setPreferredSize(new Dimension(200, 50)); // 设置按钮的首选尺寸
+            button.setBackground(Color.white);
+            button.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+            button.addActionListener(e -> {
+                jTextArea.setText(text);
+            });
+            c2.add(button);
+        }
+
+
+        c.add(jTextArea);
         c.add(scrollPane);
         c.add(userSetButton);
 

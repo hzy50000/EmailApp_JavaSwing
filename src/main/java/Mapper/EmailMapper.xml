@@ -4,6 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Mapper.EmailMapper">
     <insert id="addEmail">
-        INSERT INTO email.email (id, subject, sendUser, receiveUser, content) VALUES (#{id}, #{subject}, #{sendUser}, #{receiveUser},  #{content})
+        INSERT INTO email.email (id, subject, sendUser, receiveUser, sendTime, content, username) VALUES (#{id}, #{subject}, #{sendUser}, #{receiveUser}, #{sendTime}, #{content}, #{username})
     </insert>
+    <select id="getEmails">
+        SELECT * FROM email.email WHERE  username= #{username} order by sendTime
+    </select>
 </mapper>

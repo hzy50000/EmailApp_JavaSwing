@@ -1,16 +1,18 @@
 package Service;
 
 import Mapper.EmailMapper;
+import Util.BaseUtils;
 import com.sun.mail.pop3.POP3SSLStore;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.jsoup.Jsoup;
 import pojo.Email;
+import java.sql.Timestamp;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 import java.io.*;
 
@@ -29,7 +31,7 @@ public class ReceiveService {
         this.emailMapper = sqlSession.getMapper(EmailMapper.class);
     }
 
-    public void receiveEmail() throws Exception {
+    public Message[] receiveEmail() throws Exception {
         String host = "pop.qq.com";
         int port = 995;
         String username = "2755004257@qq.com";
@@ -64,6 +66,7 @@ public class ReceiveService {
 // 获取每一封邮件:
         Message[] messages = folder.getMessages();
         parseFileMessage(messages);
+        return messages;
     }
 
     public void parseFileMessage(Message... messages) throws Exception {
@@ -84,8 +87,10 @@ public class ReceiveService {
             getMailTextContent(msg, content);
             System.out.println("邮件正文：" + (content.length() > 100 ? content.substring(0,100) + "..." : content));
             UUID uuid = UUID.randomUUID();
-            Email email = new Email(uuid.toString(), getFrom(msg), getReceiveAddress(msg, null), getSentDate(msg, null).toString(), MimeUtility.decodeText(msg.getSubject()), content.toString());
-            this.emailMapper.addEmail(email.getId(), email.getSendUser(), email.getReceiveUser(), email.getSubject(), email.getContent());
+
+            Email email = new Email(uuid.toString(), getFrom(msg), getReceiveAddress(msg, null), (new Timestamp(getSentDate(msg, null).getTime())), MimeUtility.decodeText(msg.getSubject()), content.toString());
+            System.out.println(BaseUtils.getCurrentId());
+            this.emailMapper.addEmail(email.getId(), email.getSendUser(),  email.getReceiveUser(), email.getSubject(), email.getSentTime(), email.getContent(), "root");
             System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
         }
     }
@@ -151,23 +156,26 @@ public class ReceiveService {
      * @throws MessagingException
      * @throws IOException
      */
-    public  void getMailTextContent(Part part, StringBuffer content) throws MessagingException, IOException {
-        //如果是文本类型的附件，通过getContent方法可以取到文本内容，但这不是我们需要的结果，所以在这里要做判断
-        boolean isContainTextAttach = part.getContentType().indexOf("name") > 0;
-        if (part.isMimeType("text/*") && !isContainTextAttach) {
-            content.append(part.getContent().toString());
-        }
-        else if (part.isMimeType("message/rfc822")) {
-            getMailTextContent((Part)part.getContent(),content);
-        }
-        else if (part.isMimeType("multipart/*")) {
-            Multipart multipart = (Multipart) part.getContent();
-            int partCount = multipart.getCount();
-            for (int i = 0; i < partCount; i++) {
-                BodyPart bodyPart = multipart.getBodyPart(i);
-                getMailTextContent(bodyPart,content);
+    public void getMailTextContent(Part part, StringBuffer content) throws MessagingException, IOException {
+        if (part.isMimeType("text/*")) {
+            String text = part.getContent().toString();
+            if (part.isMimeType("text/html")) {
+                text = Jsoup.parse(text).text(); // 提取纯文本内容
             }
+            content.append(text);
+        } else if (part.isMimeType("multipart/*")) {
+            Multipart multipart = (Multipart) part.getContent();
+            for (int i = 0; i < multipart.getCount(); i++) {
+                getMailTextContent(multipart.getBodyPart(i), content);
+            }
+        } else if (part.isMimeType("message/rfc822")) {
+            getMailTextContent((Part) part.getContent(), content);
         }
+    }
+
+    public pojo.Message[] getMessages() {
+        pojo.Message[] messages =  emailMapper.getEmails("root");
+        return messages;
     }
 
     public static void main(String[] args) {
@@ -178,6 +186,8 @@ public class ReceiveService {
             throw new RuntimeException(e);
         }
     }
+
+
 }
 
 

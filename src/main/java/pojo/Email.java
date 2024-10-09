@@ -1,22 +1,33 @@
 package pojo;
 
 
+import java.sql.Timestamp;
+
 public class Email {
     private String id;
     private String sendUser;
     private String receiveUser;
-//    private String sentTime;
+    private Timestamp sentTime;
     private String subject;
     private String content;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Email() {
 
     }
-    public Email(String id, String sendUser, String receiveUser, String sentTime, String subject, String content) {
+    public Email(String id, String sendUser, String receiveUser, Timestamp sentTime, String subject, String content) {
         this.id = id;
         this.sendUser = sendUser;
         this.receiveUser = receiveUser;
-//        this.sentTime = sentTime;
+        this.sentTime = sentTime;
         this.subject = subject;
         this.content = content;
     }
@@ -45,13 +56,13 @@ public class Email {
         this.receiveUser = receiveUser;
     }
 
-//    public String getSentTime() {
-//        return sentTime;
-//    }
-//
-//    public void setSentTime(String sentTime) {
-//        this.sentTime = sentTime;
-//    }
+    public Timestamp getSentTime() {
+        return sentTime;
+    }
+
+    public void setSentTime(Timestamp sentTime) {
+        this.sentTime = sentTime;
+    }
 
     public String getSubject() {
         return subject;
