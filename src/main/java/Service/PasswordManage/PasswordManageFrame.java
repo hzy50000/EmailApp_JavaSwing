@@ -1,4 +1,4 @@
-package PasswordManage;
+package Service.PasswordManage;
 
 import Service.EmailPasswordService;
 import pojo.EmailPassword;
@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Map;
 
 public class PasswordManageFrame extends JFrame {
     private DefaultTableModel model;

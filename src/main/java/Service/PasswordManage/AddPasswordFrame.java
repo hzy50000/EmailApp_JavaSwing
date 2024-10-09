@@ -1,4 +1,4 @@
-package PasswordManage;
+package Service.PasswordManage;
 
 import Service.EmailPasswordService;
 

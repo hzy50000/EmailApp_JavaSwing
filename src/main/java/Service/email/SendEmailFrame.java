@@ -1,4 +1,4 @@
-package email;
+package Service.email;
 
 import Service.SendService;
 

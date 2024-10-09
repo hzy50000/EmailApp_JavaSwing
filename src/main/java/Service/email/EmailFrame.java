@@ -1,5 +1,6 @@
-package email;
+package Service.email;
 
+import Service.PasswordManage.PasswordManageFrame;
 import pojo.RoundBorder;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class EmailFrame extends JFrame implements ActionListener {
     public EmailFrame() throws HeadlessException, MalformedURLException { // 构造方法
         c = getContentPane(); // 获取默认的内容面板
         c.setLayout(null); // 关闭默认的布局
-        setTitle("email"); // 设置窗体的标题
+        setTitle("Service/email"); // 设置窗体的标题
         setBounds(100, 100, 900, 700); // 设置大小：窗体左上角坐标，宽度和高度
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置缺省的关闭动作
         this.setLocationRelativeTo(null); // 设置窗体居中
@@ -55,7 +56,7 @@ public class EmailFrame extends JFrame implements ActionListener {
         PasswordManagerButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         PasswordManagerButton.setBackground(Color.white);
         PasswordManagerButton.addActionListener(e -> {
-            new PasswordManage.PasswordManageFrame();
+            new PasswordManageFrame();
         });
         c.add(PasswordManagerButton);
 
