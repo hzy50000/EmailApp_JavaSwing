@@ -70,6 +70,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             // 创建并显示 ForgetPasswordFrame 实例
             new ChangePasswordFrame();
         });
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口
         this.setVisible(true);//设置窗体可见，放在最后一条
 
     }
