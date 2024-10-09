@@ -40,6 +40,7 @@ public class AddPasswordFrame extends JFrame {
         });
         add(submitButton);
 
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口
         setVisible(true);
     }
 }

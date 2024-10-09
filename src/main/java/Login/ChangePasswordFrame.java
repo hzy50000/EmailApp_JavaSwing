@@ -72,6 +72,7 @@ public class ChangePasswordFrame extends JFrame implements ActionListener {
         c.add(btnConfirm);
 
         btnConfirm.addActionListener(this);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口
         this.setVisible(true);
     }
 

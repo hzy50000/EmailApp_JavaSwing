@@ -88,7 +88,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 if(f)
                 {
                     //允许登录
-                    JOptionPane.showMessageDialog(null,"用户身份合法，可以进入");
+                    JOptionPane.showMessageDialog(null,"登陆成功");
                     this.setVisible(false);//隐藏当前窗体
                     //邮件客户端主页...
                     new EmailFrame();
