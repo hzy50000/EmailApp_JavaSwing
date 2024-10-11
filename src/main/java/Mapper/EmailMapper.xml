@@ -7,6 +7,6 @@
         INSERT INTO email.email (id, subject, sendUser, receiveUser, sendTime, content, username) VALUES (#{id}, #{subject}, #{sendUser}, #{receiveUser}, #{sendTime}, #{content}, #{username})
     </insert>
     <select id="getEmails">
-        SELECT * FROM email.email WHERE  username= #{username} order by sendTime
+        SELECT * FROM email.email WHERE  username= #{username} order by sendTime desc
     </select>
 </mapper>

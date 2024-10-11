@@ -159,9 +159,9 @@ public class ReceiveService {
     public void getMailTextContent(Part part, StringBuffer content) throws MessagingException, IOException {
         if (part.isMimeType("text/*")) {
             String text = part.getContent().toString();
-            if (part.isMimeType("text/html")) {
-                text = Jsoup.parse(text).text(); // 提取纯文本内容
-            }
+//            if (part.isMimeType("text/html")) {
+//                text = Jsoup.parse(text).text(); // 提取纯文本内容
+//            }
             content.append(text);
         } else if (part.isMimeType("multipart/*")) {
             Multipart multipart = (Multipart) part.getContent();

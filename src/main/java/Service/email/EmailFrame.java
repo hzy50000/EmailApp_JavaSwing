@@ -23,7 +23,7 @@ public class EmailFrame extends JFrame implements ActionListener {
         c = getContentPane(); // 获取默认的内容面板
         c.setLayout(null); // 关闭默认的布局
         setTitle("Service/email"); // 设置窗体的标题
-        setBounds(100, 100, 900, 700); // 设置大小：窗体左上角坐标，宽度和高度
+        setBounds(100, 100, 1500, 1000); // 设置大小：窗体左上角坐标，宽度和高度
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置缺省的关闭动作
         this.setLocationRelativeTo(null); // 设置窗体居中
 
@@ -83,29 +83,31 @@ public class EmailFrame extends JFrame implements ActionListener {
 
         JScrollPane scrollPane = new JScrollPane(c2);
         scrollPane.setBorder(new RoundBorder(Color.GRAY)); // 设置滚动面板的边框
-        scrollPane.setBounds(50, 100, 300, 500); // 设置滚动面板的位置和大小
+        scrollPane.setBounds(50, 120, 400, 800); // 设置滚动面板的位置和大小
 
-        JTextArea jTextArea = new JTextArea();
-        jTextArea.setBounds(380, 100, 450, 500);
-        jTextArea.setBorder(new RoundBorder(Color.GRAY)); // 设置文本框的边框
-        jTextArea.setLineWrap(true); // 设置自动换行
-        jTextArea.setWrapStyleWord(true); // 设置换行时以单词为单位
+        // 创建一个 JEditorPane 来渲染 HTML 内容
+        JEditorPane editorPane = new JEditorPane();
+        editorPane.setContentType("text/html");
+//        editorPane.setText("<html><body><h1>Hello, World!</h1><p>This is a paragraph with <b>bold</b> text.</p></body></html>");
+        editorPane.setEditable(false); // 设置为只读
+        JScrollPane scrollPane1 = new JScrollPane(editorPane);
+        scrollPane1.setBounds(450, 120, 1000, 800); // 设置滚动面板的位置和大小
 
         for (int i = 0; i < messages.length; i++) {
             String sentUser = messages[i].getSendUser();
             String text = messages[i].getContent();
-            JButton button = new JButton(sentUser);
-            button.setPreferredSize(new Dimension(200, 50)); // 设置按钮的首选尺寸
+            JButton button = new JButton(sentUser +"-- \n" + messages[i].getSendTime());
+            button.setPreferredSize(new Dimension(300, 50)); // 设置按钮的首选尺寸
             button.setBackground(Color.white);
             button.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
             button.addActionListener(e -> {
-                jTextArea.setText(text);
+                editorPane.setText(text);
             });
             c2.add(button);
         }
 
 
-        c.add(jTextArea);
+        c.add(scrollPane1);
         c.add(scrollPane);
         c.add(userSetButton);
 
