@@ -9,9 +9,9 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/email?useSSl=trur&amp;sueUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"/>
-                <property name="username" value="root"/>
-                <property name="password" value="87651361"/>
+                <property name="url" value="jdbc:mysql://andy-database.mysql.database.azure.com:3306"/>
+                <property name="username" value="andy"/>
+                <property name="password" value="Hzy13147651361@"/>
             </dataSource>
         </environment>
     </environments>
