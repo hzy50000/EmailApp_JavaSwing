@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.io.*;
@@ -20,8 +21,11 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
+
 public class ReceiveService {
     private final EmailMapper emailMapper;
+    private String fileName = new String("10086");
+    private Boolean isfujian = false;
 
     public ReceiveService() {
         // 加载MyBatis配置文件
@@ -31,22 +35,22 @@ public class ReceiveService {
         this.emailMapper = sqlSession.getMapper(EmailMapper.class);
     }
 
-    public Message[] receiveEmail() throws Exception {
+    public Message[] receiveEmail(String username, String password) throws Exception {
         String host = "pop.qq.com";
         int port = 995;
-        String username = "2755004257@qq.com";
-        String password = "uuaprtfpedcnddje";
+//        String username = "2755004257@qq.com";
+//        String password = "uuaprtfpedcnddje";
 
         Properties props = new Properties();
-        props.setProperty("mail.store.protocol", "pop"); // 协议名称
-        props.setProperty("mail.pop.host", host);// POP3主机名
-        props.setProperty("mail.pop.port", String.valueOf(port)); // 端口号
+        props.setProperty("mail.store.protocol", "pop3"); // 协议名称
+        props.setProperty("mail.pop3.host", host);// POP3主机名
+        props.setProperty("mail.pop3.port", String.valueOf(port)); // 端口号
 // 启动SSL:
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.port", String.valueOf(port));
 
 // 连接到Store:
-        URLName url = new URLName("pop", host, port, "", username, password);
+        URLName url = new URLName("pop3", host, port, "", username, password);
         Session session = Session.getInstance(props, null);
         session.setDebug(true); // 显示调试信息
         Store store = new POP3SSLStore(session, url);
@@ -76,6 +80,7 @@ public class ReceiveService {
         }
         // 解析读取到的邮件
         for (Message message : messages) {
+            isfujian = false;
             MimeMessage msg = (MimeMessage) message;
             System.out.println("------------------解析第" + msg.getMessageNumber() + "封邮件-------------------- ");
             System.out.println("主题: " + MimeUtility.decodeText(msg.getSubject()));
@@ -88,9 +93,9 @@ public class ReceiveService {
             System.out.println("邮件正文：" + (content.length() > 100 ? content.substring(0,100) + "..." : content));
             UUID uuid = UUID.randomUUID();
 
-            Email email = new Email(uuid.toString(), getFrom(msg), getReceiveAddress(msg, null), (new Timestamp(getSentDate(msg, null).getTime())), MimeUtility.decodeText(msg.getSubject()), content.toString());
-            System.out.println(BaseUtils.getCurrentId());
-            this.emailMapper.addEmail(email.getId(), email.getSendUser(),  email.getReceiveUser(), email.getSubject(), email.getSentTime(), email.getContent(), "root");
+            Email email = new Email(uuid.toString(), getFrom(msg), getReceiveAddress(msg, null), (new Timestamp(getSentDate(msg, null).getTime())), MimeUtility.decodeText(msg.getSubject()), content.toString(), isfujian, fileName);
+            System.out.println(isfujian);
+            this.emailMapper.addEmail(email.getId(), email.getSendUser(),  email.getReceiveUser(), email.getSubject(), email.getSentTime(), email.getContent(), "root", isfujian, fileName);
             System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
         }
     }
@@ -157,6 +162,7 @@ public class ReceiveService {
      * @throws IOException
      */
     public void getMailTextContent(Part part, StringBuffer content) throws MessagingException, IOException {
+        String saveDirectory = getClass().getClassLoader().getResource("").getPath();
         if (part.isMimeType("text/*")) {
             String text = part.getContent().toString();
 //            if (part.isMimeType("text/html")) {
@@ -171,6 +177,31 @@ public class ReceiveService {
         } else if (part.isMimeType("message/rfc822")) {
             getMailTextContent((Part) part.getContent(), content);
         }
+        else if (part instanceof MimeBodyPart) {
+            MimeBodyPart mimeBodyPart = (MimeBodyPart) part;
+            if (Part.ATTACHMENT.equalsIgnoreCase(mimeBodyPart.getDisposition())) {
+                saveAttachment(mimeBodyPart, saveDirectory);
+                isfujian = true;
+
+            }
+        }
+    }
+    // 保存附件
+    private void saveAttachment(MimeBodyPart part, String saveDirectory) throws MessagingException, IOException {
+        fileName = part.getFileName();
+        // 解码文件名
+        fileName = MimeUtility.decodeText(fileName);
+        // 处理文件名中的不合法字符
+        fileName = fileName.replaceAll("[\\\\/:*?\"<>|]", "_");
+        fileName =  UUID.randomUUID() + fileName;
+        File file = new File(saveDirectory + File.separator + fileName);
+        try (InputStream is = part.getInputStream(); FileOutputStream fos = new FileOutputStream(file)) {
+            byte[] buf = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = is.read(buf)) != -1) {
+                fos.write(buf, 0, bytesRead);
+            }
+        }
     }
 
     public pojo.Message[] getMessages() {
@@ -178,10 +209,12 @@ public class ReceiveService {
         return messages;
     }
 
+
+
     public static void main(String[] args) {
         ReceiveService receiveService = new ReceiveService();
         try {
-            receiveService.receiveEmail();
+            receiveService.receiveEmail("2755004257@qq.com", "uuaprtfpedcnddje");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,7 @@
-package Service;
+package Service.PasswordManage;
 
 import Mapper.EmailPasswordMapper;
+import Service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -8,7 +9,6 @@ import pojo.EmailPassword;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 public class EmailPasswordService {
     private final EmailPasswordMapper emailPasswordMapper;

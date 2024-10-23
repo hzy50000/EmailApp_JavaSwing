@@ -8,6 +8,24 @@ public class Message {
     private String sendTime;
     private String content;
     private String username;
+    private Boolean isFujian;
+    private String fileName;
+
+    public Boolean getFujian() {
+        return isFujian;
+    }
+
+    public void setFujian(Boolean fujian) {
+        isFujian = fujian;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getId() {
         return id;

@@ -1,6 +1,6 @@
 package Service.PasswordManage;
 
-import Service.EmailPasswordService;
+import Service.ReceiveService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,7 @@ public class AddPasswordFrame extends JFrame {
     private JTextField emailAccountField;
     private JTextField passwordField;
     private EmailPasswordService emailPasswordService = new EmailPasswordService();
+    private ReceiveService receiveService = new ReceiveService();
 
     public AddPasswordFrame() {
         setTitle("添加Email账户");
@@ -35,9 +36,15 @@ public class AddPasswordFrame extends JFrame {
                 String emailAccount = emailAccountField.getText();
                 String password = passwordField.getText();
                 emailPasswordService.addEmailPassword(emailAccount, password);
+                try {
+                    receiveService.receiveEmail(emailAccount, password);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 dispose();
             }
         });
+
         add(submitButton);
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口

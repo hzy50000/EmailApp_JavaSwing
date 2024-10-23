@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -21,6 +22,7 @@ public class EmailFrame extends JFrame implements ActionListener {
     JButton userSetButton;
     JButton PasswordManagerButton;
     ReceiveService receiveService = new ReceiveService();
+    Integer nowButton = 0;
 
     public EmailFrame() throws HeadlessException, MalformedURLException { // 构造方法
         c = getContentPane(); // 获取默认的内容面板
@@ -66,8 +68,35 @@ public class EmailFrame extends JFrame implements ActionListener {
         });
         c.add(PasswordManagerButton);
 
-
         Message[] messages = receiveService.getMessages();
+
+        JButton saveAttachmentButton = new JButton();
+        saveAttachmentButton.setText("下载附件");
+        saveAttachmentButton.setBounds(730, 30, 200, 60);
+        saveAttachmentButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+        saveAttachmentButton.setBackground(Color.white);
+        saveAttachmentButton.addActionListener(e -> {
+            if (messages[nowButton].getFujian()) {
+                JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int returnVal = fc.showSaveDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File selectedDirectory = fc.getSelectedFile();
+                    // 在这里处理附件保存逻辑，使用 selectedDirectory 作为保存路径
+                    System.out.println("Selected directory: " + selectedDirectory.getAbsolutePath());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "没有附件");
+            }
+        });
+        c.add(saveAttachmentButton);
+
+
+
+
+
+
+
 
 
 
@@ -103,8 +132,10 @@ public class EmailFrame extends JFrame implements ActionListener {
             button.setPreferredSize(new Dimension(300, 50)); // 设置按钮的首选尺寸
             button.setBackground(Color.white);
             button.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
+            int finalI = i;
             button.addActionListener(e -> {
                 editorPane.setText(text);
+                nowButton = finalI;
             });
             c2.add(button);
         }
