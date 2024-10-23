@@ -54,23 +54,16 @@ public class LoginFrame extends JFrame implements ActionListener {
         btnRegister.setBounds(190, 106, 70, 23);
         btnRegister.setText("注册");
 
-        btnChangePassword = new JButton();
-        btnChangePassword.setBounds(260, 106, 100, 23);
-        btnChangePassword.setText("修改密码");
 
         c.add(btnLogin);
         c.add(btnRegister);
-        c.add(btnChangePassword);
 //依照上述步骤设置和添加其他组件
         btnLogin.addActionListener(this);	//依次在其他按钮上添加动作事件监听器
         btnRegister.addActionListener(e -> {
             // 创建并显示 RegisterFrame 实例
             new RegisterFrame();
         });
-        btnChangePassword.addActionListener(e -> {
-            // 创建并显示 ForgetPasswordFrame 实例
-            new ChangePasswordFrame();
-        });
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口
         this.setVisible(true);//设置窗体可见，放在最后一条
 

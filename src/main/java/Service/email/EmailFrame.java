@@ -2,8 +2,11 @@ package Service.email;
 
 import Service.PasswordManage.PasswordManageFrame;
 import Service.ReceiveService;
+import Service.Setting.SettingFrame;
+import Service.UserService;
 import pojo.Message;
 import pojo.RoundBorder;
+import pojo.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,15 +37,15 @@ public class EmailFrame extends JFrame implements ActionListener {
         userSetButton.setBounds(750, 30, 80, 60);
         userSetButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         userSetButton.addActionListener(e -> {
-            new SendEmailFrame();
+            new SettingFrame();
         });
         URL url = new URL("https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg");
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
             userSetButton.setIcon(icon);
-        } else {
-            System.err.println("图像文件未找到");
         }
+
+
         JButton newEmailButton = new JButton();
         newEmailButton.setText("新建邮件");
         newEmailButton.setBounds(50, 30, 200, 60);
@@ -112,14 +115,6 @@ public class EmailFrame extends JFrame implements ActionListener {
         c.add(userSetButton);
 
         this.setVisible(true); // 设置窗体可见，放在最后一条
-    }
-
-    public void actionUserSetButton() {
-
-    }
-
-    public static void main(String[] args) throws MalformedURLException {
-        new EmailFrame();
     }
 
     @Override

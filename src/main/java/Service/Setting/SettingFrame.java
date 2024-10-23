@@ -1,13 +1,17 @@
-package Service.Login;
+package Service.Setting;
 
+import Service.Login.LoginFrame;
 import Service.UserService;
+import Service.email.EmailFrame;
+import Util.ApplicationUtils;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
-public class ChangePasswordFrame extends JFrame implements ActionListener {
+public class SettingFrame extends JFrame implements ActionListener {
     JLabel lblAccount;
     JLabel OriginalPassword;
     JLabel NewPassword;
@@ -19,10 +23,10 @@ public class ChangePasswordFrame extends JFrame implements ActionListener {
     JButton btnConfirm;
     Container c;
 
-    public ChangePasswordFrame() throws HeadlessException {
+    public SettingFrame() throws HeadlessException {
         c = getContentPane();
         c.setLayout(null);
-        setTitle("修改密码");
+        setTitle("个人资料设置");
         setBounds(100, 100, 360, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -86,17 +90,11 @@ public class ChangePasswordFrame extends JFrame implements ActionListener {
             if (newPassword.equals(confirmPassword)) {
                 UserService userService = new UserService();
                 userService.updatePassword(username, originalPassword, newPassword);
-                JOptionPane.showMessageDialog(null, "密码修改成功");
+                JOptionPane.showMessageDialog(null, "密码修改成功, 请重新启动程序并登录");
                 this.setVisible(false);
                 try {
-                    new LoginFrame(); //返回登录界面
-                } catch (UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
-                } catch (ClassNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                } catch (InstantiationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IllegalAccessException ex) {
+                    ApplicationUtils.restartApplication();
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
