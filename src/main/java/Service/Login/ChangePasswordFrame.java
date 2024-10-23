@@ -88,7 +88,17 @@ public class ChangePasswordFrame extends JFrame implements ActionListener {
                 userService.updatePassword(username, originalPassword, newPassword);
                 JOptionPane.showMessageDialog(null, "密码修改成功");
                 this.setVisible(false);
-                new LoginFrame(); //返回登录界面
+                try {
+                    new LoginFrame(); //返回登录界面
+                } catch (UnsupportedLookAndFeelException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InstantiationException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IllegalAccessException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             if (username.isEmpty() || originalPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "用户名或密码不能为空");

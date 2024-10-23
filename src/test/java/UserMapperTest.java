@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import pojo.User;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,7 +36,7 @@ public class UserMapperTest {
     }
 
     @Test
-    public void test1(){
+    public void test1() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         LoginFrame loginFrame = new LoginFrame();
         Scanner input = new Scanner(System.in);
         int a = input.nextInt();

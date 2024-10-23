@@ -18,8 +18,9 @@ public class LoginFrame extends JFrame implements ActionListener {
     JButton btnChangePassword; //忘记密码按钮
     //用同样的方法声明其他界面上的组件
     Container c;//声明添加组件的容器
-    public LoginFrame() throws HeadlessException//构造方法
+    public LoginFrame() throws HeadlessException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException//构造方法
     {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         c = getContentPane();//获取默认的内容面板
         c.setLayout(null);//关闭默认的布局
         setTitle("登录");//设置窗体的标题
