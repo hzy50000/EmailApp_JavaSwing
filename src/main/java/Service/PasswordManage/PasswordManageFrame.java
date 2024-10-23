@@ -3,6 +3,8 @@ package Service.PasswordManage;
 import pojo.EmailPassword;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,8 @@ import java.util.List;
 public class PasswordManageFrame extends JFrame {
     private DefaultTableModel model;
     private EmailPasswordService emailPasswordService = new EmailPasswordService();
+    private Integer selectedRow = -1;
+    private String valueAt;
 
     public PasswordManageFrame() {
         setTitle("密码管理");
@@ -20,7 +24,12 @@ public class PasswordManageFrame extends JFrame {
         setLayout(new BorderLayout());
 
         // 创建 JTable
-        model = new DefaultTableModel();
+        model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JTable table = new JTable(model);
 
 
@@ -33,6 +42,23 @@ public class PasswordManageFrame extends JFrame {
         for (EmailPassword emailPassword : emailPasswords) {
             model.addRow(new Object[]{emailPassword.getEmailaccount(), emailPassword.getEmailpassword()});
         }
+
+        // 添加行选择监听器
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        System.out.println("Selected row: " + selectedRow);
+                        valueAt = (String) table.getValueAt(selectedRow, 0);
+
+//                        selected
+                        // 在这里处理选中的行
+                    }
+                }
+            }
+        });
 
 
         // 添加 JTable 到 JFrame
@@ -54,12 +80,12 @@ public class PasswordManageFrame extends JFrame {
 
         // 创建删除按钮
         JButton deleteButton = new JButton("删除Email账户");
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new DeletePasswordFrame();
+
+        deleteButton.addActionListener(e -> {
+            emailPasswordService.deleteEmailPassword(valueAt);
+            refreshTable();
             }
-        });
+        );
         buttonPanel.add(deleteButton);
 
         // 创建刷新按钮

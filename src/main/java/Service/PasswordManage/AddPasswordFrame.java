@@ -35,6 +35,11 @@ public class AddPasswordFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String emailAccount = emailAccountField.getText();
                 String password = passwordField.getText();
+                String emailPassword = emailPasswordService.getEmailPassword(emailAccount);
+                if(emailPassword != null) {
+                    JOptionPane.showMessageDialog(null, "该Email账户已存在", "错误", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 emailPasswordService.addEmailPassword(emailAccount, password);
                 try {
                     receiveService.receiveEmail(emailAccount, password);
