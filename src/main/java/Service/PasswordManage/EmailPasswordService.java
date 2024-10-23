@@ -1,7 +1,7 @@
 package Service.PasswordManage;
 
 import Mapper.EmailPasswordMapper;
-import Service.UserService;
+import Service.Login.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;

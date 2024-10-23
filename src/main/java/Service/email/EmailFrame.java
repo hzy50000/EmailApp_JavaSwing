@@ -1,12 +1,9 @@
 package Service.email;
 
 import Service.PasswordManage.PasswordManageFrame;
-import Service.ReceiveService;
 import Service.Setting.SettingFrame;
-import Service.UserService;
 import pojo.Message;
 import pojo.RoundBorder;
-import pojo.User;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
 package Service.PasswordManage;
 
-import Service.ReceiveService;
+import Service.email.ReceiveService;
 
 import javax.swing.*;
 import java.awt.*;

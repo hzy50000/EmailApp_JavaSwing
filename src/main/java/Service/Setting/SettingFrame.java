@@ -1,8 +1,6 @@
 package Service.Setting;
 
-import Service.Login.LoginFrame;
-import Service.UserService;
-import Service.email.EmailFrame;
+import Service.Login.UserService;
 import Util.ApplicationUtils;
 
 import java.awt.*;

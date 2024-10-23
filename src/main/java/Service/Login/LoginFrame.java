@@ -1,6 +1,5 @@
 package Service.Login;
 
-import Service.UserService;
 import Service.email.EmailFrame;
 import org.jdesktop.swingx.prompt.PromptSupport;
 import pojo.User;
