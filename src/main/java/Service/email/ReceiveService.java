@@ -1,12 +1,11 @@
-package Service;
+package Service.email;
 
 import Mapper.EmailMapper;
-import Util.BaseUtils;
+import Service.Login.UserService;
 import com.sun.mail.pop3.POP3SSLStore;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.jsoup.Jsoup;
 import pojo.Email;
 import java.sql.Timestamp;
 

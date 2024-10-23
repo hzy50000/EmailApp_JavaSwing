@@ -1,7 +1,5 @@
 package Service.Login;
 
-import Service.UserService;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +9,11 @@ public class RegisterFrame extends JFrame implements ActionListener {
     JLabel Username;//用户名
     JLabel Password;//密码
     JLabel ConfirmPassword;//确认密码
+    JLabel avatarURL;
     JTextField txtUsername;//用户名文本框
     JPasswordField txtPassword;//密码文本框
     JPasswordField txtConfirmPassword;//确认密码文本框
+    JTextField txtAvatarURL;
     JButton btnRegister;//注册按钮
     Container c;//声明添加组件的容器
 
@@ -54,6 +54,15 @@ public class RegisterFrame extends JFrame implements ActionListener {
         txtConfirmPassword.setEchoChar('*');
         c.add(txtConfirmPassword);
 
+        avatarURL = new JLabel();
+        avatarURL.setBounds(100, 149, 60, 15);
+        avatarURL.setText("头像URL：");
+        c.add(avatarURL);
+        txtAvatarURL = new JTextField();
+        txtAvatarURL.setBounds(160, 146, 96, 21);
+        txtAvatarURL.setColumns(15);
+        c.add(txtAvatarURL);
+
         btnRegister = new JButton();
         btnRegister.setBounds(150, 130, 70, 23);
         btnRegister.setText("注册");
@@ -71,6 +80,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
                 String username = txtUsername.getText().trim();
                 String password = new String(txtPassword.getPassword());
                 String confirmPassword = new String(txtConfirmPassword.getPassword());
+                String avatarURL = txtAvatarURL.getText().trim();
                 if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "用户名或密码不能为空", "错误", JOptionPane.ERROR_MESSAGE);
                 } else if (!password.equals(confirmPassword)) {

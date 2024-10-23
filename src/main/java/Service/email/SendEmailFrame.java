@@ -1,7 +1,5 @@
 package Service.email;
 
-import Service.SendService;
-
 import javax.swing.*;
 import java.awt.*;
 

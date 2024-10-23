@@ -1,4 +1,4 @@
-package Service;
+package Service.email;
 
 import javax.mail.Session;
 import javax.mail.Transport;
