@@ -1,6 +1,5 @@
 package Service.PasswordManage;
 
-import Service.EmailPasswordService;
 import pojo.EmailPassword;
 
 import javax.swing.*;
@@ -24,9 +23,17 @@ public class PasswordManageFrame extends JFrame {
         model = new DefaultTableModel();
         JTable table = new JTable(model);
 
+
         // 添加列名
         model.addColumn("Email账户");
         model.addColumn("密码");
+
+        model.setRowCount(0);
+        List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords();
+        for (EmailPassword emailPassword : emailPasswords) {
+            model.addRow(new Object[]{emailPassword.getEmailaccount(), emailPassword.getEmailpassword()});
+        }
+
 
         // 添加 JTable 到 JFrame
         this.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -60,17 +67,20 @@ public class PasswordManageFrame extends JFrame {
         refreshButton.addActionListener(e -> refreshTable());
         buttonPanel.add(refreshButton);
         this.add(buttonPanel, BorderLayout.SOUTH);
-        refreshTable();
+//        refreshTable();
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 只关闭当前窗口
     }
 
         private void refreshTable() {
+
             model.setRowCount(0);
             List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords();
             for (EmailPassword emailPassword : emailPasswords) {
                 model.addRow(new Object[]{emailPassword.getEmailaccount(), emailPassword.getEmailpassword()});
             }
+            setVisible(false);
+            new PasswordManageFrame();
     }
 
     public static void main(String[] args) {

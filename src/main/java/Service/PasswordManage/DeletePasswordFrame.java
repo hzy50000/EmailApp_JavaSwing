@@ -1,7 +1,5 @@
 package Service.PasswordManage;
 
-import Service.EmailPasswordService;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

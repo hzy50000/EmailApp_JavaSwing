@@ -11,6 +11,33 @@ public class Email {
     private String subject;
     private String content;
     private String username;
+    private Boolean isFujian;
+    private String fileName;
+
+    public Boolean getFujian() {
+        return isFujian;
+    }
+
+    public void setFujian(Boolean fujian) {
+        isFujian = fujian;
+    }
+
+
+    public boolean isFujian() {
+        return isFujian;
+    }
+
+    public void setFujian(boolean fujian) {
+        isFujian = fujian;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getUsername() {
         return username;
@@ -23,13 +50,15 @@ public class Email {
     public Email() {
 
     }
-    public Email(String id, String sendUser, String receiveUser, Timestamp sentTime, String subject, String content) {
+    public Email(String id, String sendUser, String receiveUser, Timestamp sentTime, String subject, String content, Boolean isFujian, String fileName) {
         this.id = id;
         this.sendUser = sendUser;
         this.receiveUser = receiveUser;
         this.sentTime = sentTime;
         this.subject = subject;
         this.content = content;
+        this.isFujian = isFujian;
+        this.fileName = fileName;
     }
 
     public String getId() {
