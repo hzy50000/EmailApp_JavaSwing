@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -79,6 +79,29 @@ public class EmailFrame extends JFrame implements ActionListener {
                 int returnVal = fc.showSaveDialog(null);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File selectedDirectory = fc.getSelectedFile();
+                    String saveDirectory = getClass().getClassLoader().getResource("").getPath();
+                    String fileName = messages[nowButton].getFileName();
+                    File directory = new File(saveDirectory);
+                    File[] files = directory.listFiles();
+
+                    for(File file : files){
+                        if (file.isFile() && file.getName().equals(fileName)) {
+                            // 在这里处理找到的文件
+                            File destinationFile = new File(selectedDirectory, file.getName());
+                            try (InputStream is = new FileInputStream(file);
+                                 OutputStream os = new FileOutputStream(destinationFile)) {
+                                byte[] buffer = new byte[1024];
+                                int length;
+                                while ((length = is.read(buffer)) > 0) {
+                                    os.write(buffer, 0, length);
+                                }
+                                System.out.println("File saved to: " + destinationFile.getAbsolutePath());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+
                     // 在这里处理附件保存逻辑，使用 selectedDirectory 作为保存路径
                     System.out.println("Selected directory: " + selectedDirectory.getAbsolutePath());
                 }
