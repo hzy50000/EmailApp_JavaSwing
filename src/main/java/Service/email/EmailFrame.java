@@ -33,17 +33,17 @@ public class EmailFrame extends JFrame implements ActionListener {
 
         // 用户设置按钮
         userSetButton = new JButton();
-        userSetButton.setBounds(750, 30, 80, 60);
+        userSetButton.setBounds(1000, 30, 80, 60);
         userSetButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         userSetButton.addActionListener(e -> {
             new SettingFrame();
         });
-        URL url = new URL("https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg");
+        URL url = new URL("""
+                https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg""");
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
             userSetButton.setIcon(icon);
         }
-
 
         JButton newEmailButton = new JButton();
         newEmailButton.setText("新建邮件");
@@ -87,15 +87,6 @@ public class EmailFrame extends JFrame implements ActionListener {
             }
         });
         c.add(saveAttachmentButton);
-
-
-
-
-
-
-
-
-
 
         JButton draftBoxButton = new JButton();
         draftBoxButton.setText("草稿箱");
