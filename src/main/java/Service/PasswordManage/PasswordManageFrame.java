@@ -1,5 +1,6 @@
 package Service.PasswordManage;
 
+import Util.BaseUtils;
 import pojo.EmailPassword;
 
 import javax.swing.*;
@@ -38,7 +39,8 @@ public class PasswordManageFrame extends JFrame {
         model.addColumn("密码");
 
         model.setRowCount(0);
-        List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords();
+        String currentId = BaseUtils.getCurrentId();
+        List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords(currentId);
         for (EmailPassword emailPassword : emailPasswords) {
             model.addRow(new Object[]{emailPassword.getEmailaccount(), emailPassword.getEmailpassword()});
         }
@@ -53,8 +55,6 @@ public class PasswordManageFrame extends JFrame {
                         System.out.println("Selected row: " + selectedRow);
                         valueAt = (String) table.getValueAt(selectedRow, 0);
 
-//                        selected
-                        // 在这里处理选中的行
                     }
                 }
             }
@@ -74,7 +74,9 @@ public class PasswordManageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddPasswordFrame();
+                refreshTable();
             }
+
         });
         buttonPanel.add(addButton);
 
@@ -101,7 +103,8 @@ public class PasswordManageFrame extends JFrame {
         private void refreshTable() {
 
             model.setRowCount(0);
-            List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords();
+            String currentId = BaseUtils.getCurrentId();
+            List<EmailPassword> emailPasswords = emailPasswordService.getAllEmailPasswords(currentId);
             for (EmailPassword emailPassword : emailPasswords) {
                 model.addRow(new Object[]{emailPassword.getEmailaccount(), emailPassword.getEmailpassword()});
             }
