@@ -38,12 +38,12 @@ public class EmailFrame extends JFrame implements ActionListener {
         userSetButton.addActionListener(e -> {
             new SettingFrame();
         });
-        URL url = new URL("https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg");
+        URL url = new URL("""
+                https://cdn.acwing.com/media/user/profile/photo/387899_lg_d52d98998e.jpg""");
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
             userSetButton.setIcon(icon);
         }
-
 
         JButton newEmailButton = new JButton();
         newEmailButton.setText("新建邮件");
