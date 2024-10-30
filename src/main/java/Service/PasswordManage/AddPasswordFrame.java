@@ -1,6 +1,7 @@
 package Service.PasswordManage;
 
 import Service.email.ReceiveService;
+import Util.BaseUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +41,8 @@ public class AddPasswordFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "该Email账户已存在", "错误", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                emailPasswordService.addEmailPassword(emailAccount, password);
+                String currentId = BaseUtils.getCurrentId();
+                emailPasswordService.addEmailPassword(emailAccount, password, currentId);
                 try {
                     receiveService.receiveEmail(emailAccount, password);
                 } catch (Exception ex) {

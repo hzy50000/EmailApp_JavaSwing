@@ -2,10 +2,12 @@ package Service.email;
 
 import Mapper.EmailMapper;
 import Service.Login.UserService;
+import Util.BaseUtils;
 import com.sun.mail.pop3.POP3SSLStore;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.jsoup.Connection;
 import pojo.Email;
 import java.sql.Timestamp;
 
@@ -94,7 +96,8 @@ public class ReceiveService {
 
             Email email = new Email(uuid.toString(), getFrom(msg), getReceiveAddress(msg, null), (new Timestamp(getSentDate(msg, null).getTime())), MimeUtility.decodeText(msg.getSubject()), content.toString(), isfujian, fileName);
             System.out.println(isfujian);
-            this.emailMapper.addEmail(email.getId(), email.getSendUser(),  email.getReceiveUser(), email.getSubject(), email.getSentTime(), email.getContent(), "root", isfujian, fileName);
+            String currentId = BaseUtils.getCurrentId();
+            this.emailMapper.addEmail(email.getId(), email.getSendUser(),  email.getReceiveUser(), email.getSubject(), email.getSentTime(), email.getContent(), currentId, isfujian, fileName);
             System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
         }
     }
@@ -204,7 +207,8 @@ public class ReceiveService {
     }
 
     public pojo.Message[] getMessages() {
-        pojo.Message[] messages =  emailMapper.getEmails("root");
+        String currentId = BaseUtils.getCurrentId();
+        pojo.Message[] messages =  emailMapper.getEmails(currentId);
         return messages;
     }
 

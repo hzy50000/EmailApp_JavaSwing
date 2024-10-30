@@ -21,8 +21,8 @@ public class EmailPasswordService {
         this.emailPasswordMapper = sqlSession.getMapper(EmailPasswordMapper.class);
     }
 
-    public void addEmailPassword(String emailaccount, String emailpassword) {
-        emailPasswordMapper.addEmailPassword(emailaccount, emailpassword);
+    public void addEmailPassword(String emailaccount, String emailpassword, String user) {
+        emailPasswordMapper.addEmailPassword(emailaccount, emailpassword, user);
     }
 
     public void deleteEmailPassword(String emailaccount) {
@@ -37,8 +37,8 @@ public class EmailPasswordService {
         return emailPasswordMapper.getEmailPassword(emailaccount);
     }
 
-    public List<EmailPassword> getAllEmailPasswords() {
-        return emailPasswordMapper.getAllEmailPasswords();
+    public List<EmailPassword> getAllEmailPasswords(String user) {
+        return emailPasswordMapper.getAllEmailPasswords(user);
     }
 
 }
