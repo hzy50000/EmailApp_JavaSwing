@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper.EmailMapper">
+    <select id="getContent" resultType="java.lang.String">
+        SELECT * FROM email.draft WHERE draft.my_row_id = #{my_row_id}
+    </select>
+
+    <insert id="insertDraft">
+        INSERT INTO email.draft (draft.my_row_id, draft.content) VALUE (#{content})
+    </insert>
+
+    <update id="updateDraft">
+        UPDATE email.draft SET draft.content = #{content} WHERE draft.my_row_id = #{my_row_id}
+    </update>
+</mapper>

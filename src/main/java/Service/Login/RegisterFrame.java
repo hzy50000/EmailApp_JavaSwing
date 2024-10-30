@@ -80,7 +80,6 @@ public class RegisterFrame extends JFrame implements ActionListener {
                 String username = txtUsername.getText().trim();
                 String password = new String(txtPassword.getPassword());
                 String confirmPassword = new String(txtConfirmPassword.getPassword());
-                String avatarURL = txtAvatarURL.getText().trim();
                 if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "用户名或密码不能为空", "错误", JOptionPane.ERROR_MESSAGE);
                 } else if (!password.equals(confirmPassword)) {
