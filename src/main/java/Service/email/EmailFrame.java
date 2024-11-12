@@ -1,5 +1,6 @@
 package Service.email;
 
+import Service.Draft.DraftFrame;
 import Service.PasswordManage.PasswordManageFrame;
 import Service.Setting.SettingFrame;
 import pojo.Message;
@@ -116,6 +117,11 @@ public class EmailFrame extends JFrame implements ActionListener {
         draftBoxButton.setBounds(270, 30, 200, 60);
         draftBoxButton.setBorder(new RoundBorder(Color.GRAY)); // 设置按钮的边框
         draftBoxButton.setBackground(Color.white);
+        draftBoxButton.addActionListener(e -> {
+            String draft = ""; // This should be replaced with actual draft data if available
+            DraftFrame draftFrame = new DraftFrame(draft);
+            draftFrame.setVisible(true);
+        });
         c.add(draftBoxButton);
 
 
