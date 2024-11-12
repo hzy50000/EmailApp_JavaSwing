@@ -90,7 +90,9 @@ public class SendEmailFrame extends JFrame {
                 System.out.println(to);
                 System.out.println(subject);
                 System.out.println(content);
+                JOptionPane.showMessageDialog(null, "发送成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "发送失败", "提示", JOptionPane.ERROR_MESSAGE);
                 throw new RuntimeException(ex);
             }
         });
