@@ -75,7 +75,7 @@ public class EmailFrame extends JFrame implements ActionListener {
         saveAttachmentButton.addActionListener(e -> {
             if (messages[nowButton].getFujian()) {
                 JFileChooser fc = new JFileChooser();
-                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnVal = fc.showSaveDialog(null);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File selectedDirectory = fc.getSelectedFile();
